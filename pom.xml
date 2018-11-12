@@ -11,12 +11,17 @@
     </properties>
     <repositories>
         <repository>
-            <id>central</id>
-            <url>http://repo1.maven.org/maven2/</url>
+            <id>maven.default</id>
+            <name>default maven repository</name>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>jboss</id>
+            <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/</url>
         </repository>
         <repository>
             <id>tomp2p</id>
-            <url>http://tomp2p.net/dev/mvn/</url>
+            <url>https://tomp2p.net/dev/mvn/</url>
         </repository>
     </repositories>
     <build>
