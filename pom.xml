@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.isc</groupId>
+    <artifactId>p2p-samples</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>ddMMyyyy-HHmm</maven.build.timestamp.format>
+        <buildNumber>${maven.build.timestamp}</buildNumber>
+    </properties>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>tomp2p</id>
+            <url>http://tomp2p.net/dev/mvn/</url>
+        </repository>
+    </repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.7</version>
+                <extensions>true</extensions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-my-assembly</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <finalName>${project.build.finalName}-${buildNumber}</finalName>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <!-- MainClass in mainfest make an executable jar -->
+                    <archive>
+                        <manifest>
+                            <!-- Adds the classpath to the created manifest -->
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.isc.sample.p2p.samples.Server</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/net.java.stun4j/stun4j -->
+        <dependency>
+            <groupId>net.java.stun4j</groupId>
+            <artifactId>stun4j</artifactId>
+            <version>1.0.MOBICENTS</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>net.tomp2p</groupId>
+            <artifactId>tomp2p-nat</artifactId>
+            <version>5.0-Alpha10</version>
+        </dependency>
+    </dependencies>
+</project>
